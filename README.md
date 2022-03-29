@@ -2,8 +2,9 @@
 
 The goal is to:
 - To find a minimum area containing a meaningful part
-- Identify separate parts and save each part in separate dicom scan along with the original series. <br />
-![Required output](png/Capture.PNG) <br />
+- Identify region of interest which could be organs and draw a bounding rect around it  <br />
+
+![Required output](https://github.com/amalmsaleem/3d-Smart-Fit/blob/main/lung1.gif) <br />
 ## Algorithm <br />
 - A window with WL = default WL of scan and WW = 80% of default WW value i.e. WW = 0.8 * default WW was applied to get a better contrast.
 - Adaptive thresholding considers a small set of neighboring pixels at a time, computes threshold for that specific local region, and then performs the segmentation. Hence, segmenting the object even for varying lightning conditions within an image which was the case in most of the scans.
@@ -13,7 +14,7 @@ The goal is to:
 - Removing Boundary Pixels: 50 pixels from image boundary that is top bottom left and right were removed to get rid of bright boundary lines that are visible in some scans. These boundaries have the same intensity values as the objects.
 - Closing can remove small dark spots and connect small bright cracks. Therefore, morphological closing was applied to get better segmentation of objects.
 - Found the contours and drew bounding rects of those contours. Applied the threshold on contour area while drawing bounding rects as the objects are relatively bigger in size.
-- Cropped the region inside each bounding rect and saved each object as a dicom file. <br />
+- Created boundary rect around the region <br />
 #### Output of algorithm: <br />
 ![Output](png/Capture3.PNG) <br />
 ![Output](png/Capture_new.PNG) <br />
